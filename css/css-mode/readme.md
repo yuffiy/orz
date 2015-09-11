@@ -14,8 +14,8 @@
 
 w width:
 h height:
-w1: width: 100%;
-h1: width: 100%;
+w1 width: 100%;
+h1 height: 100%;
 miw min-width:
 mih min-height:
 maw max-width:
@@ -66,7 +66,6 @@ fll float: left;
 flr float: right;
 db display: block;
 dib display: inline-block;
-ta text-align:
 tac text-align: center;
 tal text-align: left;
 tar text-align: right;
@@ -107,8 +106,8 @@ op0 opacity: 0;
 * white-space
 
 fz font-size:
-fzl font-size: 1.125em;
-fzs font-size: 0.875em;
+fz+ font-size: 1.125em;
+fz- font-size: 0.875em;
 fw font-weight:
 fwb font-weight: bolder;
 fwn font-weight: normal;
@@ -136,7 +135,7 @@ cu cursor:
 cup cursor: pointer;
 cud cursor: default;
 cun cursor: not-allow;
-pen: pointer-events: none;
+pen pointer-events: none;
 
 ## resize
 
