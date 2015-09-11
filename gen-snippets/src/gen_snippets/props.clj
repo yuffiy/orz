@@ -1,4 +1,6 @@
-(def props
+(ns gen-snippets.props)
+
+(def css-props
   [
    ;; width height line-height
    ["w" "width"]
@@ -25,14 +27,14 @@
    ["p0" "padding" "0"]
    ["m0" "margin" "0"]
    ["ma" "margin" "auto"]
-   ["m0a" "margin" "0" "auto"]
+   ["m0a" "margin" "0 auto"]
    ["bd" "border"]
    ["bdt" "border-top"]
    ["bdr" "border-right"]
    ["bdb" "border-bottom"]
    ["bdl" "border-left"]
-   ["bd1" "border" "1px" "solid" "#ddd"]
-   ["bd1d" "border" "1px" "dotted" "#ddd"]
+   ["bd1" "border" "1px solid #ddd"]
+   ["bd1d" "border" "1px dotted #ddd"]
 
    ;; position float display
    ["pos" "position"]
