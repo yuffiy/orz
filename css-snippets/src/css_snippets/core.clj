@@ -29,11 +29,13 @@ eg: java -jar gen-snippet.jar ~/.emacs.d/snippets/
   "Replace values"
   [values]
   (if values
-      (->> values
-       (.split #"\s")
-       (map-indexed #(str "\\${" (inc %1) \: %2 "}"))
-       (join #" "))
-      "\\$1"))
+    ;;(->> values
+    ;;   (.split #"\s")
+    ;;(map-indexed #(str "\\${" (inc %1) \: %2 "}"))
+    ;;      (join #" "))
+    ;; if haven't values
+    (str values ";`\\(newline-and-indent\\)`\\$0")
+    "\\$1;`\\(newline-and-indent\\)`\\$0"))
 
 (defn- replace-template
   "Replace template"

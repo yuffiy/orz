@@ -2,6 +2,8 @@
 
 Generate file form template and list files.
 
+[![asciicast](https://asciinema.org/a/c34uoakjgnmqsbi9h1rjwp69m.png)](https://asciinema.org/a/c34uoakjgnmqsbi9h1rjwp69m)
+
 Container snippets:
 
 ```js
@@ -95,7 +97,7 @@ Container snippets:
     "td": ["text-decoration"],
     "tdn": ["text-decoration", "none"],
     "tdu": ["text-decoration", "normal"],
-    "ls": ["etter-space"],
+    "ls": ["letter-space"],
     "ws": ["white-space"],
     "wsn": ["white-space", "nowrap"],
 

@@ -88,7 +88,7 @@
     "td": ["text-decoration"],
     "tdn": ["text-decoration", "none"],
     "tdu": ["text-decoration", "normal"],
-    "ls": ["etter-space"],
+    "ls": ["letter-space"],
     "ws": ["white-space"],
     "wsn": ["white-space", "nowrap"],
 
