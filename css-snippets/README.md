@@ -15,11 +15,10 @@ Container snippets:
     "lh": ["line-height"],
     "w1": ["width", "100%"],
     "h1": ["height", "100%"],
-    "lh1": ["line-height", "100%"],
-    "h1": ["height", "100%"],
+    "lh1": ["line-height", "1"],
 
 
-    "P": ["padding"],
+    "p": ["padding"],
     "pt": ["padding-top"],
     "pr": ["padding-right"],
     "pb": ["padding-bottom"],
