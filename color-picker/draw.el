@@ -34,57 +34,61 @@
     )p
   )
 
-(save-current-buffer
-  (when (get-buffer color-picker-buffer-name)
-    (kill-buffer color-picker-buffer-name))
-  (generate-new-buffer color-picker-buffer-name)
-  (set-buffer (get-buffer-create color-picker-buffer-name))
-  (font-lock-mode nil)
+
+(defun yufi/pick-color ()
+  ""
+  (interactive)
+  
+  (save-current-buffer
+    (when (get-buffer color-picker-buffer-name)
+      (kill-buffer color-picker-buffer-name))
+    (generate-new-buffer color-picker-buffer-name)
+    (set-buffer (get-buffer-create color-picker-buffer-name))
+    (font-lock-mode nil)
 
 
-  (let* ((current-window (selected-window))
-	 (current-window-width (window-body-width))
-	 (window (split-window-right (- current-window-width color-picker-window-width)))
-	 (window-width (+ 2 (window-body-width window)))
-	 (title "Material Design Colors")
-	 (title-len (string-width title)))
+    (let* ((current-window (selected-window))
+	   (current-window-width (window-body-width))
+	   (window (split-window-right (- current-window-width color-picker-window-width)))
+	   (window-width (+ 2 (window-body-width window)))
+	   (title "Material Design Colors")
+	   (title-len (string-width title)))
 
-    (set-window-buffer window color-picker-buffer-name)
-    (select-window window)
+      (set-window-buffer window color-picker-buffer-name)
+      (select-window window)
 
-    (newline)
-    (insert-text-center window-width title)
-    (newline 4)
-    (insert "1.")
-    (insert "Red")
-    (newline 2)
-    (insert-left-space window-width 35)
-    (ov-set (ov-insert (make-string 7 ?\s)) 'face '(:background "#d32f2f"))
-    (newline)
-    (insert-left-space window-width 35)
-    (ov-set (ov-insert (make-string 7 ?\s)) 'face '(:background "#d32f2f"))
-    (insert "   rgb: (255,255,255) [pick]")
-    (newline)
-    (insert-left-space window-width 35)
-    (ov-set (ov-insert (make-string 7 ?\s)) 'face '(:background "#d32f2f"))
-    (insert "   rgb: (255,255,255) [pick]")
-    (newline)
-    (insert-left-space window-width 35)
-    (ov-set (ov-insert (make-string 7 ?\s)) 'face '(:background "#d32f2f"))
-    (insert "   rgb: (255,255,255) ")
-    (insert-button "[pick]" 'action 'button-click-handle)
-    (newline)
-    (insert-left-space window-width 35)
-    (ov-set (ov-insert (make-string 7 ?\s)) 'face '(:background "#d32f2f"))
+      (newline)
+      (insert-text-center window-width title)
+      (newline 4)
+      (insert "1.")
+      (insert "Red")
+      (newline 2)
+      (insert-left-space window-width 35)
+      (ov-set (ov-insert (make-string 7 ?\s)) 'face '(:background "#d32f2f"))
+      (newline)
+      (insert-left-space window-width 35)
+      (ov-set (ov-insert (make-string 7 ?\s)) 'face '(:background "#d32f2f"))
+      (insert "   rgb: (255,255,255) [pick]")
+      (newline)
+      (insert-left-space window-width 35)
+      (ov-set (ov-insert (make-string 7 ?\s)) 'face '(:background "#d32f2f"))
+      (insert "   rgb: (255,255,255) [pick]")
+      (newline)
+      (insert-left-space window-width 35)
+      (ov-set (ov-insert (make-string 7 ?\s)) 'face '(:background "#d32f2f"))
+      (insert "   rgb: (255,255,255) ")
+      (insert-button "[pick]" 'action 'button-click-handle)
+      (newline)
+      (insert-left-space window-width 35)
+      (ov-set (ov-insert (make-string 7 ?\s)) 'face '(:background "#d32f2f"))
 
-    
-    
+      
+      
+      )
+    (beginning-of-buffer)
+    (read-only-mode t)
+
     )
-  (beginning-of-buffer)
-  (read-only-mode t)
 
   )
 
-
-
-;; insert center
