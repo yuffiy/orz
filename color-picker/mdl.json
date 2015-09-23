@@ -1,96 +1,101 @@
 {
-    "name": "material design",
-    
+    "title": "Material Design Colors",
+    "namespace": "mdl",
     "colors": [
 	{
 	    "name": "red",
 	    "value": "#d32f2f",
-	    "group": "red",
 	    "order": 0
 	},
 	{
-	    "name": "red--50",
-	    "value": "#ffebee",
-	    "group": "red",
+	    "name": "pink",
+	    "value": "#c2185b",
 	    "order": 1
 	},
 	{
-	    "name": "red--100",
-	    "value": "#ffcdd2",
-	    "group": "red",
+	    "name": "purple",
+	    "value": "#6a1b9a",
 	    "order": 2
 	},
 	{
-	    "name": "red--200",
-	    "value": "#ef9a9a",
-	    "group": "red",
+	    "name": "deep-purple",
+	    "value": "#512da8",
 	    "order": 3
 	},
 	{
-	    "name": "red--300",
-	    "value": "#e57373",
-	    "group": "red",
+	    "name": "indigo",
+	    "value": "#303f9f",
 	    "order": 4
 	},
 	{
-	    "name": "red--400",
-	    "value": "#ef5350",
-	    "group": "red",
+	    "name": "blue",
+	    "value": "#1976d2",
 	    "order": 5
 	},
 	{
-	    "name": "red--500",
-	    "value": "#f44336",
-	    "group": "red",
+	    "name": "light-blue",
+	    "value": "#0288d1",
 	    "order": 6
 	},
 	{
-	    "name": "red--600",
-	    "value": "#e53935",
-	    "group": "red",
+	    "name": "cyan",
+	    "value": "#0097a7",
 	    "order": 7
 	},
 	{
-	    "name": "red--700",
-	    "value": "#d32f2f",
-	    "group": "red",
+	    "name": "teal",
+	    "value": "#00796b",
 	    "order": 8
 	},
 	{
-	    "name": "red--800",
-	    "value": "#c62828",
-	    "group": "red",
+	    "name": "green",
+	    "value": "#388e3c",
 	    "order": 9
 	},
 	{
-	    "name": "red--900",
-	    "value": "#b71c1c",
-	    "group": "red",
+	    "name": "light-green",
+	    "value": "#689f38",
 	    "order": 10
 	},
 	{
-	    "name": "red--a100",
-	    "value": "#ff8a80",
-	    "group": "red",
+	    "name": "lime",
+	    "value": "#afb42b",
 	    "order": 11
 	},
 	{
-	    "name": "red--a200",
-	    "value": "#ff5252",
-	    "group": "red",
+	    "name": "yellow",
+	    "value": "#fbc02d",
 	    "order": 12
 	},
 	{
-	    "name": "red--a400",
-	    "value": "#ff1744",
-	    "group": "red",
+	    "name": "amber",
+	    "value": "#ffa000",
 	    "order": 13
 	},
 	{
-	    "name": "red--a700",
-	    "value": "#d50000",
-	    "group": "red",
+	    "name": "orange",
+	    "value": "#f57c00",
 	    "order": 14
+	},
+	{
+	    "name": "deep-orange",
+	    "value": "#e64a19",
+	    "order": 15
+	},
+	{
+	    "name": "brown",
+	    "value": "#5d4037",
+	    "order": 16
+	},
+	{
+	    "name": "grey",
+	    "value": "#616161",
+	    "order": 17
+	},
+	{
+	    "name": "greyBlue",
+	    "value": "#455a64",
+	    "order": 18
 	}
     ]
 }

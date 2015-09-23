@@ -1,0 +1,80 @@
+{
+    "name": "Material Design Red Colors",
+
+    "namespace": "mdl",
+
+    "group": "red",
+    
+    "colors": [
+	{
+	    "name": "red--50",
+	    "value": "#ffebee",
+	    "order": 0
+	},
+	{
+	    "name": "red--100",
+	    "value": "#ffcdd2",
+	    "order": 1
+	},
+	{
+	    "name": "red--200",
+	    "value": "#ef9a9a",
+	    "order": 2
+	},
+	{
+	    "name": "red--300",
+	    "value": "#e57373",
+	    "order": 3
+	},
+	{
+	    "name": "red--400",
+	    "value": "#ef5350",
+	    "order": 4
+	},
+	{
+	    "name": "red--500",
+	    "value": "#f44336",
+	    "order": 5
+	},
+	{
+	    "name": "red--600",
+	    "value": "#e53935",
+	    "order": 6
+	},
+	{
+	    "name": "red--700",
+	    "value": "#d32f2f",
+	    "order": 7
+	},
+	{
+	    "name": "red--800",
+	    "value": "#c62828",
+	    "order": 8
+	},
+	{
+	    "name": "red--900",
+	    "value": "#b71c1c",
+	    "order": 9
+	},
+	{
+	    "name": "red--a100",
+	    "value": "#ff8a80",
+	    "order": 10
+	},
+	{
+	    "name": "red--a200",
+	    "value": "#ff5252",
+	    "order": 11
+	},
+	{
+	    "name": "red--a400",
+	    "value": "#ff1744",
+	    "order": 12
+	},
+	{
+	    "name": "red--a700",
+	    "value": "#d50000",
+	    "order": 13
+	}
+    ]
+}
