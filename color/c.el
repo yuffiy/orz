@@ -1,4 +1,15 @@
+;;; c.el color change for css.
+
+;; Copyright (C) 2012-2015 Free Software Foundation, Inc.
+
+;; Author: Yufi <yfhj1990@hotmail.com>
+;; Version: 0.0.1
+;; Keywords: color css
+
+
 ;; TODO rgba hsla
+
+;;; Code:
 
 (require 'dash)
 (require 'dash-functional)
@@ -14,8 +25,21 @@
   "Regex for hsl color.")
 
 ;;
-;; rgb hsl.
+;; Convert with rgb color and hsl color.
 ;;
+(defsubst c-h-rgb (m1 m2 h0)
+  "Compute middle value."
+  (-let* ((h1 (when (< h0 0) (1+ h0)))
+	  (h2 (when (> h0 1) (1- h0)))
+	  (h (--first (not (eq it nil)) (list h1 h2 h0))))
+    (cadr (--first
+     (not (eq (car it) nil))
+     (list
+      (list (< (* h 6) 1) (+ m1 (* (- m2 m1) h 6)))
+      (list (< (* h 2) 1) m2)
+      (list (< (* h 3) 2) (+ m1 (* (- m2 m1) (- (/ 2 3) h) 6)))
+      (list t m1))))))
+
 (defsubst c-rgb-hsl (rgb)
   "Convert rgb to hsl."
   ;; http://en.wikipedia.org/wiki/HSL_and_HSV#Conversion_from_RGB_to_HSL_or_HSV
@@ -35,19 +59,6 @@
 	  (s (if (< l 0.5) (/ d 2 (/ 1 l)) (/ d (- 2 (* 2 l))))))
     (list h s l)))
 
-(defsubst c-h-rgb (m1 m2 h0)
-  "Compute middle value."
-  (-let* ((h1 (when (< h0 0) (1+ h0)))
-	  (h2 (when (> h0 1) (1- h0)))
-	  (h (--first (not (eq it nil)) (list h1 h2 h0))))
-
-    (cadr (--first
-     (not (eq (car it) nil))
-     (list
-      (list (< (* h 6) 1) (+ m1 (* (- m2 m1) h 6)))
-      (list (< (* h 2) 1) m2)
-      (list (< (* h 3) 2) (+ m1 (* (- m2 m1) (- (/ 2 3) h) 6)))
-      (list t m1))))))
 
 (defsubst c-hsl-rgb (hsl)
   "Convert hsl to rgb."
@@ -61,7 +72,7 @@
     (--map (round (* it 255)) (list r g b))))
 
 ;;
-;; Convert color value to mate date
+;; Convert color to mate date
 ;;
 (defsubst c-hex-mate (c)
   "Check hex format color."
@@ -116,15 +127,9 @@
 	    'c-rgb-mate
 	    'c-hsl-mate))))
 
-
-(c-mate "#d32f2f")
-
-
-;; idear.
-;; rbg object ("rgb" r g b)
-;; hsl object ("hsl" h s l)
-;; -- or color object (r g b h s l) --
-
+;;
+;; Output color
+;;
 (defun c-round-float (n)
   "Round float to per cent."
   (round (* n 100)))
@@ -142,23 +147,81 @@
 (defun c-hsl-fmt (m)
   "Output hsl color."
   (-let (((_ _ _ h s l) m))
-    (format "hsl(%d, %d%%, %d%%)" (round h) (c-round-float s) (c-round-float l))))
+    (format "hsl(%d, %d%%, %d%%)"
+	    (round h)
+	    (c-round-float s)
+	    (c-round-float l))))
 
-
-(defvar c-fmt-list '(hex c-hex-fmt rgb c-rgb-fmt hsl c-hsl-fmt))
-
-(plist-get c-fmt-list (intern "hex"))
-
-(c-hsl-fmt (c-mate "#d32f2f"))
-(defun color (c fmt)
+(defun c-color (c fmt)
   "Convert color hex|rgb|hsl"
   (interactive)
   (funcall
-   (plist-get c-fmt-list (intern fmt))
-   (c-mate c))
-  )
+   (plist-get
+    '(hex c-hex-fmt rgb c-rgb-fmt hsl c-hsl-fmt)
+    (intern fmt))
+   (c-mate c)))
 
-(color "#d32f2f" "rgb")
+
+;;
+;; Color value change loop.
+;; 
+(defvar c-trun-list '("hex" "rgb" "hsl") "List for color format change.")
+(defvar c-trun-dir "next" "Direction of color change trun.")
+
+(defun c-hex-flag (c)
+  "Make hex color flag."
+  (when (s-match c-re-hex c) "hex"))
+
+(defun c-shex-flag (c)
+  "Make short hexc color flag."
+  (when (s-match c-re-shex c) "hex"))
+
+(defun c-rgb-flag (c)
+  "Make rgb color flag."
+  (when (s-match c-re-rgb c) "rgb"))
+
+(defun c-hsl-flag (c)
+  "Make hsl color flag."
+  (when (s-match c-re-hsl c) "hsl"))
+
+(defun c-flag (c)
+  "Make color flag."
+  (--first
+   (not (eq it nil))
+   (--map (funcall it c)
+	  (list
+	   'c-hex-flag
+	   'c-rgb-flag))))
+
+(defun c-next (flag trun-list)
+  "Next flag form trun list."
+  (-let* ((current flag)
+	  (len (length trun-list))
+	  (idx (-elem-index current trun-list))
+	  (cidx (if (>= (1+ idx) len) 0 (1+ idx))))
+    (nth cidx trun-list)))
+
+(defun c-prev (flag trun-list)
+  "Prev flag form trun list."
+  (-let* ((current flag)
+	  (len (length trun-list))
+	  (idx (-elem-index current trun-list))
+	  (cidx (if (< (1- idx) 0) (1- len) (1- idx))))
+    (nth cidx trun-list)))
+
+(defun c-trun (c)
+  "Change color format."
+  (interactive)
+  (-let* ((flag (c-flag c))
+	  (dir (if  (string= c-trun-dir "prev") 'c-prev 'c-next))
+	  (flag-trun (funcall dir flag c-trun-list)))
+
+    (c-color c flag-trun)
+    ))
+
+(c-trun "#d32f2f")
+(c-trun "rgb(211, 47, 47)")
+
 
 ;; func
 (defun c-darken (c)
@@ -167,3 +230,8 @@
 (defun c-lighten (c)
   ""
   )
+
+
+(provide 'c)
+
+;;; c.el end here.

@@ -31,7 +31,7 @@
     (delete-other-windows)
     (kill-buffer color-picker-buffer-name)
     (insert value)
-    )p
+    )
   )
 
 
