@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <!--
+	这个例子非常简单，
+	是一个用户列表的删除功能
+	用户有id和name组成
+	哦，还有一个删除按钮
+	大概像下面这个样子：
+
+        <div>
+	  name
+          <a href="">删除</a>
+	</div>
+
+
+	点击删除按钮会删除掉这一列的用户
+	-->
+    <div id="app"></div>
+    <script type="text/javascript">
+    // 首先，dispatcher是由四部分组成的
+    // 他们分别是 全局dispatcher store action 和 view
+    // dispatcher是全局对象，也是个单例
+    // store用来操作用户模型
+    // 而action用来传递给dispatcher，dispatch得到action后去更新view
+    // view很简单, 只有一个render方法用来渲染模型， 就是我们刚才看到的
+    // 哦，忘记了，我们先去设置一个app容器
+
+    // 接下来开始实现dispatcher
+
+    function Dispatcher() {
+	// 这个集合用来存放callback
+	this.callbacks = [];
+    }
+
+// 这个方法用来注册dispatcher
+Dispatcher.prototype.register = function(callback) {
+    this.callbacks.push(callback);
+    return this.callbacks.length - 1;
+
+};
+
+// 接下来的方法用来出发callback
+Dispatcher.prototype.dispatch = function(action) {
+    this.callbacks.forEach(function(callback, i) {
+	callback(action);
+    });
+};
+
+
+// 这样Dispatcher就定义完成
+// 我们直接来实例化一个
+
+var dispatcher = new Dispatcher();
+
+// 理论上将他是一个单例，但这里并没有实现他
+
+// 现在就来定义用户模型
+// UserStore
+
+var UserStore = (function() {
+    var _datas = {
+	1: {
+	    id: 1,
+	    name: "user1"
+	},
+	2: {
+	    id: 2,
+	    name: "user2"
+	}
+    };
+
+    // 这么做是故意的，原因是可以用delete key来简单的删除对象的键
+
+    function getAll() {
+	return _datas;
+    }
+
+    function deleteUser(id) {
+	delete _datas[id];
+    }
+
+    // 这样就用delete实现了删除方法，我们先来做一些初始化数据
+
+
+    // 接下来注册一个dispatcher
+
+    function init() {
+	dispatcher.register(function(action) {
+	    if(action.actionType === "delete") {
+		deleteUser(action.id);
+		// render
+		UserView.render();
+		// 因为view还没有写，所以这里先空着
+		// 由这个参数可以看见，action对象有actionType和id两个属性
+	    }
+	});
+    }
+
+    init();
+
+    return {
+	getAll: getAll
+    };
+})();
+
+// 根据上面的dispatcher注册，我们来实现这个action
+// Action
+
+var UserAction = {
+    deleteUser: function(id) {
+	dispatcher.dispatch({
+	    actionType: "delete",
+	    id: id
+	});
+    }
+};
+
+// 只需要把id传递个删除action就可以了，而触发Action的就是View
+// View
+
+var UserView = {
+    render: function() {
+	var dom = "";
+	var datas = UserStore.getAll();
+
+	for(var k in datas) {
+	    dom += "<div>"+datas[k].name+"<a onclick=\"javascript:UserAction.deleteUser("+datas[k].id+")\">delete</a></div>";
+	}
+
+	// 把这个dom放在容器中
+	document.getElementById("app").innerHTML = dom;
+    }
+}
+
+UserView.render();
+
+// 这样就完成了，貌似还忘记了什么，
+// 刚才注册是还没有重新渲染模板
+// 这样就可以了。
+
+// end。
+
+</script>
+  </body>
+</html>
